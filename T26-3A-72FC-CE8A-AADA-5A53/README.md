@@ -1,4 +1,4 @@
-> EM PREPARAÇÃO — gerado e inspecionado localmente em 16/11/2026. A URL abaixo é provisória, não comprova deploy. Login real, banco remoto e testes dos agentes permanecem pendentes. O backend de diagnóstico original ainda precisa de revisão de autenticação antes de publicação. Não abrir Pull Request da pasta T26 no repositório do professor.
+> EM PREPARAÇÃO: correções de autenticação e interface implementadas; 20 testes locais aprovados em 17/11/2026. Deploy, Discord real e D1 remoto pendentes. A URL abaixo é provisória. Não abrir PR da pasta T26 no repositório do professor.
 
 # Projeto #0: Projeto 0 (Teste de Ambiente e Entrega — Sem Nota): Painel de Diagnóstico Cloudflare + D1 + Discord
 
@@ -50,3 +50,13 @@ A aplicação consiste em um Painel de Check-in e Diagnóstico de Entrega constr
        - `DISCORD_CLIENT_SECRET`
 6. Atualize o campo **URL_CLOUDFLARE** no topo deste `README.md` com o endereço público gerado pela Cloudflare.
 7. Na raiz do repositório, execute `node validar-local.mjs T26-3A-72FC-CE8A-AADA-5A53` para validar todos os critérios antes de fazer o commit e abrir o Pull Request.
+
+## Configuração adicional obrigatória
+
+Adicione `SESSION_SECRET` como segredo na Cloudflare: valor aleatório com pelo menos 32 caracteres. Não use a chave de auditoria como segredo. `DISCORD_CLIENT_SECRET` também deve ser secreto; nenhum valor real deve ser enviado ao GitHub. O backend rejeita login se os segredos ou o banco não estiverem configurados.
+
+## Testes locais
+
+Na subpasta: `npm test` (Node.js 24 utilizado na validação). Os testes usam simuladores; detalhes e verificações remotas pendentes em [docs/VALIDACAO.md](docs/VALIDACAO.md).
+
+A configuração `wrangler.jsonc` contém um identificador D1 provisório: substituir pelo ID do banco criado antes de publicar. Aplicar `migrations/0001_init.sql` ao D1. O aplicativo não cria tabelas durante requisições.

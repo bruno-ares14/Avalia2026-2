@@ -3,48 +3,59 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projeto #0 — T26-3A-72FC-CE8A-AADA-5A53</title>
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Painel de diagnóstico do Projeto 0: conexão, autenticação e persistência.">
+  <title>Projeto 0 · Diagnóstico do ambiente</title>
   <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
   <header class="topbar">
-    <div class="topbar-inner">
-      <div>
-        <strong>Projeto #0: Projeto 0 (Teste de Ambiente e Entrega — Sem Nota): Painel de Diagnóstico Cloudflare + D1 + Discord</strong>
-      </div>
-      <div class="discord-badge" id="discordProfile">
-        <a id="discordLoginLink" href="/api/auth/discord" style="color:inherit;text-decoration:none;">
-          <span id="discordUserText">Entrar com Discord OAuth2</span>
-        </a>
-      </div>
+    <a class="brand" href="/" aria-label="Projeto 0, início"><span class="brand-mark" aria-hidden="true">0</span><span>Projeto 0<small>Prática Profissional · Desenvolvimento Web</small></span></a>
+    <div class="account">
+      <div class="profile" id="discordProfile" hidden><img id="discordAvatar" width="36" height="36" alt=""><span><strong id="discordUserText"></strong><small id="discordUserId"></small></span></div>
+      <a class="button" id="discordLoginLink" href="/api/auth/discord" hidden>Entrar com Discord <span aria-hidden="true">↗</span></a>
+      <button class="button secondary" id="logoutBtn" type="button" hidden>Sair</button>
     </div>
   </header>
-
-  <main>
-    <section class="card">
-      <span class="pill">Projeto 0 · Teste de Entrega (Sem Nota)</span>
-      <h1>Projeto 0 (Teste de Ambiente e Entrega — Sem Nota): Painel de Diagnóstico Cloudflare + D1 + Discord</h1>
-      <p class="desc">Projeto universal de treinamento (sem sorteio e sem nota) que todos os estudantes realizam igualmente para validar o ambiente Node.js instalado em modo usuário via Scoop nos computadores da instituição, o deploy de subpasta no Cloudflare Pages com banco de dados Cloudflare D1 e o fluxo completo de entrega e avaliação automatizada via Pull Request no repositório frankalcantara/Avalia2026-2. A aplicação consiste em um Painel de Check-in e Diagnóstico de Entrega construído em HTML5, CSS3 e JavaScript puro (Vanilla JS): a interface exibe o status da autenticação OAuth2 do Discord, consulta uma Cloudflare Pages Function (/api/status) conectada a uma tabela de diagnósticos no banco Cloudflare D1 e permite registrar um ping de verificação contendo a Chave de Teste (T26-...) do estudante. O pacote da subpasta também exercita os 3 agentes obrigatórios (incluindo o agente de teste e validação), o documento AGENTS.md descrevendo o harness, a pasta skills/ e a licença MIT.</p>
-
-      <div class="form-row">
-        <input class="input-text" id="recordInput" type="text" placeholder="Digite um registro para gravar na Cloudflare Function + D1...">
-        <button class="btn-primary" id="sendBtn" type="button">Registrar no Cloudflare D1</button>
-      </div>
-      <div id="statusMessage" style="font-size:0.88rem;font-weight:700;color:#166534;margin-bottom:0.75rem;"></div>
+  <main id="main">
+    <section class="intro" aria-labelledby="pageTitle">
+      <p class="eyebrow">AMBIENTE DE TESTE · SEM NOTA</p>
+      <h1 id="pageTitle">Uma base pronta<br>para construir.</h1>
+      <p class="lede">Confira a conexão com o servidor, entre com Discord e grave uma nota para verificar a persistência no banco.</p>
+      <div class="intro-meta"><span>Bruno Ares</span><span>Turma 3A</span><span>Cloudflare Pages + D1</span></div>
     </section>
-
-    <section class="card">
-      <h2 style="font-size:1.15rem;font-weight:800;margin-bottom:0.85rem;">Registros Persistidos (Cloudflare Pages Functions + D1)</h2>
-      <ul class="records-list" id="recordsList">
-        <li>Carregando status da API serverless...</li>
+    <section class="diagnostics" aria-labelledby="diagnosticTitle">
+      <div class="section-heading"><h2 id="diagnosticTitle">Diagnóstico do ambiente</h2><button class="text-button" id="refreshBtn" type="button">Atualizar diagnóstico <span aria-hidden="true">↻</span></button></div>
+      <ul class="status-grid" aria-live="polite" aria-atomic="true">
+        <li class="status-card"><span class="status-label">01 / SERVIDOR</span><strong>API</strong><span class="status-value" id="apiStatus" data-state="loading">Verificando…</span></li>
+        <li class="status-card"><span class="status-label">02 / PERSISTÊNCIA</span><strong>Banco D1</strong><span class="status-value" id="dbStatus" data-state="loading">Verificando…</span></li>
+        <li class="status-card"><span class="status-label">03 / INTEGRAÇÃO</span><strong>Discord OAuth2</strong><span class="status-value" id="oauthStatus" data-state="loading">Verificando…</span></li>
+        <li class="status-card"><span class="status-label">04 / IDENTIDADE</span><strong>Sua sessão</strong><span class="status-value" id="sessionStatus" data-state="loading">Verificando…</span></li>
       </ul>
+      <p class="diagnostic-note" id="diagnosticNote" role="status">Consultando o ambiente. Nenhuma conexão foi confirmada ainda.</p>
     </section>
+    <div class="workspace">
+      <section class="panel" aria-labelledby="registerTitle">
+        <p class="eyebrow">TESTE DE GRAVAÇÃO</p><h2 id="registerTitle">Registre uma nota.</h2>
+        <p class="muted" id="formHint">Aguarde a verificação do ambiente para começar.</p>
+        <form id="recordForm">
+          <label for="recordInput">Mensagem de teste</label>
+          <textarea id="recordInput" name="conteudo" rows="4" maxlength="500" required disabled aria-describedby="formHint characterCount" placeholder="Ex.: Primeiro registro de teste do meu projeto."></textarea>
+          <div class="form-bottom"><span class="muted" id="characterCount">0 / 500 caracteres</span><button class="button primary" id="sendBtn" type="submit" disabled>Gravar no banco <span aria-hidden="true">→</span></button></div>
+          <p class="feedback" id="statusMessage" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+      <section class="panel history" aria-labelledby="historyTitle">
+        <div class="section-heading"><div><p class="eyebrow">SEU HISTÓRICO</p><h2 id="historyTitle">Registros persistidos</h2></div><span class="count" id="recordCount" aria-label="Total de registros">—</span></div>
+        <p class="muted">Os 10 registros mais recentes da sua conta.</p>
+        <ul class="records-list" id="recordsList"><li class="empty-state">Aguardando o diagnóstico…</li></ul>
+      </section>
+    </div>
+    <aside class="notice"><strong>Um teste antes do projeto final.</strong><p>Este painel verifica a infraestrutura do futuro Acervo de Citações e Notas de Leitura. A confirmação completa exige login e gravação reais; este Projeto 0 não deve ser enviado como Pull Request ao professor.</p></aside>
+    <noscript><p class="feedback error">Ative o JavaScript para consultar o diagnóstico e utilizar o login.</p></noscript>
   </main>
-
-  <footer id="projectFooter">
-    Chave Única de Auditoria: <code>T26-3A-72FC-CE8A-AADA-5A53</code> · Turma 3A · Licenciado sob MIT
-  </footer>
-
-  <script src="/app.js"></script>
+  <footer id="projectFooter"><span>Projeto 0 · Licença MIT</span><span>Chave de auditoria <code>T26-3A-72FC-CE8A-AADA-5A53</code></span></footer>
 </body>
 </html>

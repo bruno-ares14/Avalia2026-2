@@ -1,36 +1,26 @@
-> ESTADO: estrutura gerada pelo inicializador oficial em 16/11/2026. Os três agentes abaixo são um plano, ainda não um registro de execução. Não há validação de produção concluída.
+# Engenharia de agentes — Projeto 0
 
-# Documentação de Engenharia de Agentes e Harness (T26-3A-72FC-CE8A-AADA-5A53)
+Chave: `T26-3A-72FC-CE8A-AADA-5A53`.
 
-> **Requisito da Rubrica (25 pontos):** Uso obrigatório de no mínimo **3 agentes diferentes** (sendo obrigatoriamente **1 agente dedicado a teste e validação**), documentando em qual *harness* operaram e relacionando as *skills* na pasta `skills/`.
+## Harness e coordenação
 
-## 1. Ambiente de Orquestração (Harness Utilizado)
+Ambiente: Codex em ChatGPT Work, com subagentes separados, ferramentas de terminal, arquivos compartilhados e integração GitHub. Modelo-base da sessão: GPT-6, sem seleção manual de variante por agente. O agente principal distribuiu responsabilidades e contratos; os agentes editaram áreas separadas. Trabalho iniciado em 16/11/2026 e validação retomada em 17/11/2026 após interrupção. Este documento registra apenas o trabalho observado nos arquivos e resultados de testes.
 
-- **Harness Principal:** *(Descreva aqui qual harness foi utilizado, ex: Antigravity / Claude Code / Cursor / Cline / GitHub Copilot Workspace / OpenHands)*
-- **Modelo(s) Base:** *(Informe os modelos utilizados pelos agentes)*
-- **Estratégia de Coordenação:** Planejamento: os agentes deverão operar de forma modular sobre a subpasta `T26-3A-72FC-CE8A-AADA-5A53/`, compartilhando especificações de banco de dados D1, contratos JSON das Cloudflare Pages Functions e verificação automatizada via `validar-local.mjs`.
+## Agente 1 — backend
 
----
+Skill consultada: `skills/serverless-d1-discord/SKILL.md`.
+Implementou `lib/auth.js` e rotas em `functions/api/`: sessões HMAC com expiração e cookies HttpOnly/Secure; estado OAuth assinado; identidade obtida do Discord; validação de origem e corpo; consultas parametrizadas por proprietário; logout e erros sem falsa confirmação de persistência.
 
-## 2. Agentes Criados e Responsabilidades (Mínimo de 3 Agentes)
+## Agente 2 — interface
 
-### Agente 1: Arquiteto Serverless, Cloudflare D1 e Segurança Discord OAuth2
-- **Papel:** Modelagem do esquema relacional SQLite no Cloudflare D1 (`migrations/0001_init.sql`), implementação do fluxo de autenticação Discord OAuth2 e validação das regras de negócio no servidor (`functions/`).
-- **Skill Utilizada:** [`skills/serverless-d1-discord/SKILL.md`](./skills/serverless-d1-discord/SKILL.md)
-- **Entregas Previstas (pendentes):**
-  - Estruturação das tabelas e índices no Cloudflare D1.
-  - Proteção das rotas serverless contra manipulação no cliente.
+Skill consultada: `skills/vanilla-dom-ui/SKILL.md`.
+Implementou `public/`: painel HTML/CSS/JavaScript puro, estados de API/D1/OAuth/sessão, formulário acessível, histórico individual, login e logout, mensagens de erro e carregamento. Removeu usuário fictício. Adicionou cabeçalhos de proteção para conteúdo estático.
 
-### Agente 2: Especialista em Interface Web Vanilla (HTML5, CSS3 e DOM)
-- **Papel:** Construção da interface responsiva e acessível utilizando exclusivamente HTML5 semântico, CSS3 moderno (sem sombras em fontes) e JavaScript puro (Vanilla JS), consumindo as rotas serverless via `fetch`.
-- **Skill Utilizada:** [`skills/vanilla-dom-ui/SKILL.md`](./skills/vanilla-dom-ui/SKILL.md)
-- **Entregas Previstas (pendentes):**
-  - Componentes visuais em `public/index.html`, `public/styles.css` e `public/app.js`.
-  - Inclusão do cabeçalho de perfil do Discord (`user_id`, nome e avatar) e rodapé oficial com a Chave Única `T26-3A-72FC-CE8A-AADA-5A53`.
+## Agente 3 — teste e validação
 
-### Agente 3: Agente de Teste, Auditoria de Segurança e Validação (Obrigatório)
-- **Papel:** Verificação independente de ponta a ponta: inspeção de contratos de API, tentativa de contorno das validações do servidor, auditoria da rubrica de 100 pontos e execução de testes funcionais.
-- **Skill Utilizada:** [`skills/teste-validacao/SKILL.md`](./skills/teste-validacao/SKILL.md)
-- **Entregas Previstas (pendentes):**
-  - Bateria de verificação de integridade dos endpoints e conformidade com a rubrica (`validar-local.mjs` e casos de teste documentados abaixo).
-  - Relatório de validação confirmando ausência de frameworks proibidos, presença da licença MIT e funcionamento no Cloudflare.
+Skill consultada: `skills/teste-validacao/SKILL.md`.
+A tarefa original `validation` foi interrompida antes de produzir testes. O subagente independente `validation_resume` retomou a responsabilidade em 17/11/2026 e produziu `tests/security.test.mjs` e `docs/VALIDACAO.md`: 20 testes locais aprovados, usando simuladores de Discord e D1. Revisou estaticamente o contrato da interface e executou o validador oficial (8/9, deploy pendente).
+
+## Limitações verificadas
+
+Ainda não foram comprovados deploy, login real Discord, D1 remoto, teste com duas contas ou inspeção visual em navegador. Arquivos de skills são os fornecidos pelo gerador do professor e foram consultados pelos respectivos agentes. Testes locais não substituem validação de produção. Nenhum Pull Request de teste deve ser enviado ao professor.
