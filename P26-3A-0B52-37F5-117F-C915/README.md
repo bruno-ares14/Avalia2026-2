@@ -2,7 +2,7 @@
 
 Projeto 41 de Bruno Ares, turma 3A. Chave oficial **P26-3A-0B52-37F5-117F-C915**.
 
-**URL_CLOUDFLARE** — pendente da publicação do projeto oficial.
+**URL_CLOUDFLARE** — https://acervo-bruno-ares.pages.dev/
 
 ## Como usar
 
@@ -18,14 +18,14 @@ Use Node.js 24 ou superior nesta pasta. Execute `npm test` para os testes e `npx
 
 ## Publicação no Cloudflare Pages
 
-Conecte o fork ao Pages. Selecione a branch `projeto-41`, o diretório raiz `P26-3A-0B52-37F5-117F-C915` e a pasta de saída `public`. Deixe vazio o comando de build. Crie um D1 exclusivo para o acervo. Antes do deploy, acrescente a `wrangler.jsonc` a lista `d1_databases` com o binding `DB`, o nome do novo banco em `database_name` e seu UUID real em `database_id`. O identificador depende da criação do banco na conta Cloudflare.
+Conecte o fork ao Pages. Selecione a branch `projeto-41`, o diretório raiz `P26-3A-0B52-37F5-117F-C915` e a pasta de saída `public`. Deixe vazio o comando de build. O banco exclusivo do acervo está configurado no arquivo `wrangler.jsonc`, com o binding `DB`.
 
-Cadastre `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` e `SESSION_SECRET` no ambiente de produção do Pages. O segredo de sessão deve ser aleatório, exclusivo deste projeto e ter ao menos 32 caracteres. Cadastre no Discord o domínio HTTPS efetivamente publicado seguido de `/api/auth/discord/callback`. Após configurar os segredos, publique novamente para que o deploy os utilize.
+Cadastre `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` e `SESSION_SECRET` no ambiente de produção do Pages. O segredo de sessão deve ser aleatório, exclusivo deste projeto e ter ao menos 32 caracteres. Cadastre no Discord o endereço de retorno `https://acervo-bruno-ares.pages.dev/api/auth/discord/callback`. Após configurar os segredos, publique novamente para que o deploy os utilize.
 
 O esquema inicial está em `migrations/0001_acervo.sql`. O servidor inicializa um banco existente e vazio quando encontra as tabelas ausentes. Para migrar explicitamente, execute `npx wrangler d1 migrations apply DB --remote`. Após alterar a migração inicial durante o desenvolvimento, rode `node scripts/gerar-schema.mjs` e `npm test`.
 
 ## Verificação e entrega
 
-A suíte local verifica persistência, isolamento de duas contas, sorteio público e o fluxo OAuth com um provedor simulado. Na publicação, confirme o domínio, o callback real, uma gravação e a leitura após recarregar. Registre a URL acima e rode `node validar-local.mjs P26-3A-0B52-37F5-117F-C915` na raiz do fork. A branch de entrega contém apenas a subpasta oficial sobre a base da disciplina.
+A suíte local verifica persistência, isolamento de duas contas, sorteio público e o fluxo OAuth com um provedor simulado. No primeiro teste em produção, o feed mostrou zero citações, o sorteio informou que aguardava a primeira citação pública e a chave oficial apareceu no rodapé. O login retornou `auth_not_configured`. Após configurar o OAuth, valide uma gravação e a leitura após recarregar. Rode `node validar-local.mjs P26-3A-0B52-37F5-117F-C915` na raiz do fork. A branch de entrega contém apenas a subpasta oficial sobre a base da disciplina.
 
 As responsabilidades e skills dos três agentes estão em [AGENTS.md](AGENTS.md). Licença MIT em [LICENSE](LICENSE).
