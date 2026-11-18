@@ -30,15 +30,10 @@ O validador oficial procura arquivos e padrões de texto: sua aprovação estrut
 
 Inspeção do código confirmou compatibilidade com o contrato da API: `sessionUser.user_id`, `{conteudo}` no POST, `saved: true` antes de anunciar gravação e POST para logout. A interface não cria usuário fictício, bloqueia gravação sem sessão/banco e utiliza `textContent` para notas e nomes. Foram encontrados estados de erro, vazio e carregamento, rótulos de formulário e mensagens de estado acessíveis. A revisão foi estática; não equivale a testes visuais ou de navegador.
 
-## Verificações ainda obrigatórias antes da conclusão
+## Teste de ambiente em produção
 
-- Painel HTTPS e resposta da API confirmados pelo navegador em 17/11. A consulta inicial indicou banco indisponível e configuração Discord pendente.
-- Após a inicialização das tabelas, o painel de produção mostrou a API disponível e o banco D1 conectado.
-- O responsável confirmou o cadastro das três variáveis do login no painel da Cloudflare. A autorização com uma conta Discord e a gravação do ping ainda aguardam teste em produção.
-- Executar autorização Discord real, logout e retorno de erro/cancelamento no navegador.
-- Validar cookies `Secure`, `HttpOnly`, `SameSite=Lax` em produção.
-- Gravar, recarregar e entrar novamente para confirmar persistência D1.
-- Usar duas contas distintas para demonstrar isolamento real do histórico.
-- Inspecionar interface no desktop e celular, teclado, foco e console.
+O painel público respondeu via HTTPS. Após a inicialização das tabelas e a configuração das variáveis do Discord, o diagnóstico mostrou API disponível, banco D1 conectado e Discord configurado.
 
-Nenhum teste desta suíte deve ser apresentado como prova de execução remota. Não foi realizado deploy nem acesso a contas pelo agente de validação.
+Bruno realizou o login com sua conta Discord e viu o próprio nome no painel. Em seguida, gravou uma mensagem pelo formulário, recarregou a página e confirmou que o registro continuou no histórico. Isso conclui o teste funcional de login e persistência do Projeto 0.
+
+Logout, cancelamento da autorização, inspeção dos cookies, isolamento entre duas contas reais e revisão visual em celular ficam sem comprovação em produção nesta rodada.
