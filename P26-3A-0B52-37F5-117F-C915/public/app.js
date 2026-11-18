@@ -33,7 +33,10 @@ function makeCard(quote, showNote = false) {
   const author = element("strong", quote.author);
   const reference = element("p");
   reference.append(author, document.createTextNode(" · "), element("cite", quote.source));
-  if (quote.page) reference.append(document.createTextNode(" · p. " + quote.page));
+  if (quote.page) {
+    const prefix = quote.kind === "palestra" ? " · " : " · p. ";
+    reference.append(document.createTextNode(prefix + quote.page));
+  }
   card.append(heading, citation, reference);
   const attribution = quote.username ? " · " + quote.username : "";
   card.append(element("p", (quote.visibility === "private" ? "Privada" : "Pública") + attribution, "byline"));
@@ -140,7 +143,7 @@ function compose() {
 function updatePage() {
   const needed = form.elements.kind.value !== "palestra";
   form.elements.page.required = needed;
-  byId("page-label").querySelector("span").textContent = needed ? "Página" : "Página (opcional)";
+  byId("page-label").querySelector("span").textContent = needed ? "Página" : "Página ou tempo (opcional)";
 }
 
 form.elements.kind.addEventListener("change", updatePage);

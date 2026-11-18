@@ -12,4 +12,4 @@ Aplicou `skills/vanilla-dom-ui/SKILL.md`. Construiu o Entrelinhas em HTML, CSS e
 
 ## Agente de teste e validação — acervo_qa
 
-Aplicou `skills/teste-validacao/SKILL.md`. Criou testes com duas identidades, executou a migração em SQLite e verificou respostas dos handlers para visitantes e leitores autenticados. Revisou os estados de erro da interface, os identificadores HTML, as referências acessíveis e a chave do rodapé. O navegador local teve a inicialização bloqueada pelo ambiente. A revisão visual e o OAuth com conta real dependem de validação após a publicação.
+Aplicou `skills/teste-validacao/SKILL.md`. Criou testes com duas identidades, executou a migração em SQLite e verificou respostas dos handlers para visitantes e leitores autenticados. Revisou os estados de erro da interface, os identificadores HTML, as referências acessíveis e a chave do rodapé. O navegador local teve a inicialização bloqueada pelo ambiente. Após a publicação, Bruno validou o login com a própria conta Discord e o cadastro de uma citação pública. O coordenador conferiu a ficha em uma sessão de visitante, a busca por autor e tema e o sorteio com a nota de leitura.
