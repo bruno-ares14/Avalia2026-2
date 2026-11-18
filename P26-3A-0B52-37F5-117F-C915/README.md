@@ -26,6 +26,8 @@ O esquema inicial está em `migrations/0001_acervo.sql`. O servidor inicializa u
 
 ## Verificação e entrega
 
-A suíte local verifica persistência, isolamento de duas contas, sorteio público e o fluxo OAuth com um provedor simulado. No primeiro teste em produção, o feed mostrou zero citações, o sorteio informou que aguardava a primeira citação pública e a chave oficial apareceu no rodapé. O primeiro teste precedeu o cadastro das credenciais OAuth. Com a aplicação Entrelinhas configurada, valide a autorização real, uma gravação e a leitura após recarregar. Rode `node validar-local.mjs P26-3A-0B52-37F5-117F-C915` na raiz do fork. A branch de entrega contém apenas a subpasta oficial sobre a base da disciplina.
+Os 10 testes locais passaram. Eles exercitam a persistência, o isolamento entre duas contas, o sorteio público e o fluxo OAuth com provedor simulado. Em produção, Bruno confirmou o login com Discord e a gravação de uma citação pública. Em uma sessão independente de visitante, a ficha de Macunaíma apareceu após recarregar. A busca a encontrou por autor e por tema, e uma consulta sem correspondência retornou zero fichas. O sorteio público exibiu o trecho e a nota de leitura. A chave oficial foi conferida no rodapé.
+
+Rode `node validar-local.mjs P26-3A-0B52-37F5-117F-C915` na raiz do fork. A branch de entrega contém apenas a subpasta oficial sobre a base da disciplina.
 
 As responsabilidades e skills dos três agentes estão em [AGENTS.md](AGENTS.md). Licença MIT em [LICENSE](LICENSE).
