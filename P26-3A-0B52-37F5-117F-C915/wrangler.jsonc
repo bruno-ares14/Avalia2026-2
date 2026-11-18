@@ -9,5 +9,8 @@
       "database_name": "acervo-bruno-ares",
       "database_id": "21b7a63a-e4af-47ce-9e8e-66e2a9a22cf7"
     }
-  ]
+  ],
+  "vars": {
+    "DISCORD_CLIENT_ID": "1572410790156304456"
+  }
 }
