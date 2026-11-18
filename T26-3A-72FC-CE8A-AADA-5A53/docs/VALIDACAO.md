@@ -22,7 +22,7 @@ Cobertura comportamental:
 
 ## Validador oficial
 
-`node validar-local.mjs T26-3A-72FC-CE8A-AADA-5A53` executado na raiz do repositório: **8 verificações estruturais aprovadas; publicação online pendente**. O endereço provisório do README não foi confirmado como aplicação publicada.
+`node validar-local.mjs T26-3A-72FC-CE8A-AADA-5A53` executado na raiz do repositório: **8 verificações estruturais aprovadas; publicação online pendente**. Esse resultado precede a publicação. O README agora contém o endereço público observado.
 
 O validador oficial procura arquivos e padrões de texto: sua aprovação estrutural não comprova execução real dos agentes, segurança completa ou login efetivo. A documentação de agentes deve registrar o trabalho efetivamente realizado.
 
@@ -32,7 +32,7 @@ Inspeção do código confirmou compatibilidade com o contrato da API: `sessionU
 
 ## Verificações ainda obrigatórias antes da conclusão
 
-- Publicar no Cloudflare Pages e confirmar respostas HTTPS reais.
+- Painel HTTPS e resposta da API confirmados pelo navegador em 17/11. A consulta inicial indicou banco indisponível e configuração Discord pendente.
 - Criar/vincular D1 e aplicar a migração remota.
 - Configurar as credenciais do Discord e segredo de sessão, sem versionar valores reais.
 - Executar autorização Discord real, logout e retorno de erro/cancelamento no navegador.

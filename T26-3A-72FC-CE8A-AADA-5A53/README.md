@@ -1,12 +1,10 @@
-> EM PREPARAÇÃO: correções de autenticação e interface implementadas; 20 testes locais aprovados em 17/11/2026. Deploy, Discord real e D1 remoto pendentes. A URL abaixo é provisória. Não abrir PR da pasta T26 no repositório do professor.
-
 # Projeto #0: Projeto 0 (Teste de Ambiente e Entrega — Sem Nota): Painel de Diagnóstico Cloudflare + D1 + Discord
 
 - **Modalidade:** Projeto 0 — Teste de Ambiente e Entrega (Sem Sorteio e Sem Nota)
 - **Estudante:** Bruno Ares
 - **Turma:** 3A
 - **Chave Única:** `T26-3A-72FC-CE8A-AADA-5A53`
-- **URL_CLOUDFLARE:** `https://t26-3a-72fc-ce8a-aada-5a53.pages.dev` *(Atualize com a URL pública real do seu deploy na Cloudflare antes de abrir o Pull Request)*
+- **URL_CLOUDFLARE:** `https://avalia2026-2-7zj.pages.dev`
 
 ---
 
@@ -42,7 +40,7 @@ A aplicação consiste em um Painel de Check-in e Diagnóstico de Entrega constr
    - Na aba **OAuth2**:
      - Copie o **Client ID** e gere o **Client Secret**.
      - Em **Redirects**, adicione a URL exata do deploy:
-       `https://t26-3a-72fc-ce8a-aada-5a53.pages.dev/api/auth/discord/callback`
+       `https://avalia2026-2-7zj.pages.dev/api/auth/discord/callback`
    - No painel do seu projeto no Cloudflare Pages:
      - Acesse **Settings** → **Environment variables**.
      - Adicione as variáveis de ambiente:
@@ -59,4 +57,4 @@ Adicione `SESSION_SECRET` como segredo na Cloudflare: valor aleatório com pelo 
 
 Na subpasta: `npm test` (Node.js 24 utilizado na validação). Os testes usam simuladores; detalhes e verificações remotas pendentes em [docs/VALIDACAO.md](docs/VALIDACAO.md).
 
-A configuração `wrangler.jsonc` contém um identificador D1 provisório: substituir pelo ID do banco criado antes de publicar. Aplicar `migrations/0001_init.sql` ao D1. O aplicativo não cria tabelas durante requisições.
+O painel e a API foram observados online. Na primeira verificação, o painel indicou D1 indisponível e Discord pendente. A API prepara a estrutura inicial no primeiro diagnóstico se a tabela ainda não existir. Login e gravação em produção exigem as credenciais configuradas.

@@ -1,3 +1,4 @@
+import { checkDiagnosticsTable } from '../../lib/diagnostics-schema.js';
 import { configured, failure, getSession, json, sameOrigin } from '../../lib/auth.js';
 const CHAVE = 'T26-3A-72FC-CE8A-AADA-5A53';
 
@@ -11,7 +12,7 @@ export async function onRequest({ request, env }) {
     if (env.DB) {
       try {
         // Checks the migrated table, not merely D1 binding presence.
-        await env.DB.prepare('SELECT id FROM project_records LIMIT 1').first();
+        await checkDiagnosticsTable(env.DB);
         if (sessionUser) {
           const count = await env.DB.prepare('SELECT COUNT(*) AS total FROM project_records WHERE user_id = ? AND chave_projeto = ?').bind(sessionUser.user_id, CHAVE).first();
           const records = await env.DB.prepare('SELECT id, user_id, username, conteudo, created_at FROM project_records WHERE user_id = ? AND chave_projeto = ? ORDER BY id DESC LIMIT 10').bind(sessionUser.user_id, CHAVE).all();
