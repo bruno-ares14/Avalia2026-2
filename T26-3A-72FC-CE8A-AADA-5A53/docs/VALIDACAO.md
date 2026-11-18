@@ -33,8 +33,8 @@ Inspeção do código confirmou compatibilidade com o contrato da API: `sessionU
 ## Verificações ainda obrigatórias antes da conclusão
 
 - Painel HTTPS e resposta da API confirmados pelo navegador em 17/11. A consulta inicial indicou banco indisponível e configuração Discord pendente.
-- Criar/vincular D1 e aplicar a migração remota.
-- Configurar as credenciais do Discord e segredo de sessão, sem versionar valores reais.
+- Após a inicialização das tabelas, o painel de produção mostrou a API disponível e o banco D1 conectado.
+- O responsável confirmou o cadastro das três variáveis do login no painel da Cloudflare. A autorização com uma conta Discord e a gravação do ping ainda aguardam teste em produção.
 - Executar autorização Discord real, logout e retorno de erro/cancelamento no navegador.
 - Validar cookies `Secure`, `HttpOnly`, `SameSite=Lax` em produção.
 - Gravar, recarregar e entrar novamente para confirmar persistência D1.
